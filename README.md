@@ -1,9 +1,9 @@
 
 # global-combinations
 
-Code accompanying the paper ‘Global combinations of expert forecasts’.
+R code accompanying the paper ‘Global combinations of expert forecasts’.
 
-You should install Gurobi and the associated R package gurobi before
+You should install Gurobi and the associated R package `gurobi` before
 using this code. Gurobi is available for free under academic license at
 <https://www.gurobi.com/>.
 
@@ -12,7 +12,7 @@ using this code. Gurobi is available for free under academic license at
 The `combine()` function fits forecast combination weights for a
 sequence of tuning parameters. The tuning parameter `gamma` controls the
 level of globalisation and `lambda` controls the level of shrinkage. The
-`cv.combine` functions chooses the best values of the parameters
+`cv.combine` function chooses good values of the parameters
 automatically using leave-one-out cross-validation.
 
 ``` r
@@ -29,12 +29,12 @@ combine(x, scheme = 'optimal', gamma = 0, lambda = 0)
 ```
 
     ## [[1]]
-    ##           [,1]      [,2]      [,3]
-    ## [1,] 0.0909584 0.2702194 0.1364487
-    ## [2,] 0.2738042 0.1494573 0.1877587
-    ## [3,] 0.2652071 0.1053267 0.2954725
-    ## [4,] 0.1998196 0.2049365 0.1845877
-    ## [5,] 0.1702108 0.2700600 0.1957324
+    ##            [,1]      [,2]       [,3]
+    ## [1,] 0.13412812 0.2289420 0.33878341
+    ## [2,] 0.02864837 0.2520558 0.29258236
+    ## [3,] 0.35281229 0.2646848 0.10041654
+    ## [4,] 0.26603953 0.1110819 0.24978408
+    ## [5,] 0.21837168 0.1432355 0.01843361
 
 ``` r
 # Fit the global optimal combination
@@ -43,33 +43,33 @@ combine(x, scheme = 'optimal', gamma = 1e6, lambda = 0)
 
     ## [[1]]
     ##           [,1]      [,2]      [,3]
-    ## [1,] 0.1640282 0.1640289 0.1640282
-    ## [2,] 0.1900090 0.1900085 0.1900087
-    ## [3,] 0.2355067 0.2355058 0.2355070
-    ## [4,] 0.1938856 0.1938859 0.1938858
-    ## [5,] 0.2165705 0.2165708 0.2165703
+    ## [1,] 0.2165707 0.2165714 0.2165718
+    ## [2,] 0.2021712 0.2021719 0.2021721
+    ## [3,] 0.2712285 0.2712275 0.2712270
+    ## [4,] 0.1966654 0.1966650 0.1966655
+    ## [5,] 0.1133643 0.1133643 0.1133636
 
 ``` r
 # Fit the global optimal combination with grouped tasks
-combine(x, scheme = 'optimal', gamma = 1e6, lambda = 0, group = c(1, 1, 2))
+combine(x, scheme = 'optimal', group = c(1, 1, 2), gamma = 1e6, lambda = 0)
 ```
 
     ## [[1]]
-    ##           [,1]      [,2]      [,3]
-    ## [1,] 0.1925696 0.1925703 0.1364487
-    ## [2,] 0.2024248 0.2024244 0.1877587
-    ## [3,] 0.1860809 0.1860800 0.2954725
-    ## [4,] 0.1805066 0.1805069 0.1845877
-    ## [5,] 0.2384181 0.2384184 0.1957324
+    ##           [,1]      [,2]       [,3]
+    ## [1,] 0.1850168 0.1850174 0.33878341
+    ## [2,] 0.1527581 0.1527589 0.29258236
+    ## [3,] 0.3175761 0.3175754 0.10041654
+    ## [4,] 0.1898926 0.1898919 0.24978408
+    ## [5,] 0.1547565 0.1547565 0.01843361
 
 ``` r
-# Cross-validate the globalisation parameter
-cv.combine(x, scheme = 'optimal', lambda = 0)
+# Cross-validate the tuning parameters
+cv.combine(x, scheme = 'optimal')
 ```
 
     ##           [,1]      [,2]      [,3]
-    ## [1,] 0.1638055 0.1988963 0.1638452
-    ## [2,] 0.1903571 0.1798172 0.1899865
-    ## [3,] 0.2355939 0.1849486 0.2359076
-    ## [4,] 0.1936921 0.1994283 0.1938871
-    ## [5,] 0.2165514 0.2369096 0.2163735
+    ## [1,] 0.1586639 0.2000175 0.2345242
+    ## [2,] 0.1049071 0.1999988 0.2228004
+    ## [3,] 0.3128793 0.2000590 0.1820349
+    ## [4,] 0.2321819 0.2000052 0.2113089
+    ## [5,] 0.1913679 0.1999195 0.1493315
